@@ -1,102 +1,189 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="no-js">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ديوان دانة</title>
-<meta name="description" content="ديوان دانة — قصائد وكتابات.">
+<meta name="description" content="ديوان دانة — قصائد ونصوص.">
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
 
-<nav class="site-nav">
-  <div class="wrap">
-    <a class="brand" href="index.html">ديوان <span>دانة</span></a>
-    <ul class="nav-links">
-      <li><a href="index.html" class="active">الرئيسية</a></li>
-      <li><a href="poems.html">القصائد</a></li>
-      <li><a href="writings.html">كتابات</a></li>
-      <li><a href="about.html">عنّي</a></li>
-    </ul>
-  </div>
-</nav>
+<!-- النجمة الثمانية المستخدمة في الزخارف -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="star" viewBox="0 0 100 100">
+    <g fill="none" stroke="currentColor" stroke-width="2.5">
+      <rect x="22" y="22" width="56" height="56"/>
+      <rect x="22" y="22" width="56" height="56" transform="rotate(45 50 50)"/>
+      <circle cx="50" cy="50" r="13"/>
+      <circle cx="50" cy="50" r="4" fill="currentColor"/>
+    </g>
+  </symbol>
+</svg>
 
-<header class="hero">
-  <img src="img/typewriter.jpeg" alt="يدان تكتبان على آلة كاتبة قديمة">
-  <div class="wrap">
-    <h1>ديوان <span>دانة</span></h1>
-    <p class="typed" data-typed>كلماتٌ احتفظتُ بها طويلاً، وبعضُها صار لك.</p>
-    <div class="cta-row">
-      <a class="btn btn-primary" href="poems.html">اقرأ القصائد</a>
-      <a class="btn btn-ghost" href="about.html">من أنا</a>
+<!-- ============ الكتاب ============ -->
+<div class="stage">
+  <div class="book" id="book" data-state="cover">
+
+    <div class="cover front" id="front-cover" role="button" tabindex="0" aria-label="افتح الديوان">
+      <div class="cover-frame">
+        <svg class="corner c1"><use href="#star"/></svg>
+        <svg class="corner c2"><use href="#star"/></svg>
+        <svg class="corner c3"><use href="#star"/></svg>
+        <svg class="corner c4"><use href="#star"/></svg>
+        <svg class="cover-star"><use href="#star"/></svg>
+        <p class="cover-kicker">ديوان</p>
+        <h1 class="cover-title">دانة</h1>
+        <div class="cover-rule"></div>
+        <p class="cover-sub">قصائد ونصوص</p>
+      </div>
     </div>
+
+    <div class="spread" id="spread">
+      <article class="sheet-page side-right" id="slot-right"></article>
+      <article class="sheet-page side-left" id="slot-left"></article>
+    </div>
+
+    <div class="cover back" id="back-cover">
+      <div class="cover-frame">
+        <svg class="cover-star"><use href="#star"/></svg>
+        <p class="cover-sub">ديوان دانة</p>
+      </div>
+    </div>
+
   </div>
-</header>
 
-<main class="wrap">
+  <nav class="book-nav" aria-label="تقليب الصفحات">
+    <button type="button" id="prev">→ السابقة</button>
+    <span class="where">
+      <span id="where"></span>
+      <button type="button" class="link" id="to-toc">الفهرس</button>
+    </span>
+    <button type="button" id="next">التالية ←</button>
+  </nav>
+</div>
 
-  <!-- القصيدة المختارة: بدّليها بقصيدة تحبينها -->
-  <section class="sheet read reveal">
-    <span class="label">قصيدة مختارة</span>
-    <h2>عنوان القصيدة هنا</h2>
-    <p class="verse">هنا تُكتب قصيدتكِ المفضّلة،
-قصيرةً بما يكفي لتُقرأ في نَفَسٍ واحد،
-حتى يعرفَ الزائرُ صوتَكِ
-قبل أن يقرأ البقية.</p>
-    <p class="signature">— كُتبت في ليلةٍ هادئة</p>
+<!--
+  ============ صفحات الديوان ============
+  كل صفحة = <section class="page"> … </section>
+  الترتيب هنا هو ترتيب الصفحات في الكتاب، والأرقام والفهرس تنحسب تلقائياً.
+
+  data-toc="..."   ← اسم الصفحة في الفهرس (اللي ما لها data-toc ما تطلع في الفهرس)
+  data-part="..."  ← بداية باب جديد، واسمه يطلع أعلى صفحات الباب
+  class="plain"    ← صفحة بدون رقم وبدون عنوان أعلاها
+  class="center"   ← المحتوى في نص الصفحة
+-->
+<div class="pages-src" id="pages">
+
+  <section class="page plain center title-page">
+    <svg class="orn-star"><use href="#star"/></svg>
+    <p class="small">ديوان</p>
+    <h1 class="ruqaa big">دانة</h1>
+    <div class="divider"></div>
+    <p>قصائد ونصوص</p>
+    <p class="small muted">الطبعة الأولى · ٢٠٢٦</p>
   </section>
 
-  <div class="section-head reveal">
-    <h2>أحدث القصائد</h2>
-    <a href="poems.html">كل القصائد ←</a>
-  </div>
-  <div class="card-grid reveal">
-    <article class="card">
-      <span class="label">جديدة</span>
-      <h3><a href="poems.html#poem-1">القصيدة الأولى</a></h3>
-      <p>سطر أو سطران يعرّفان بالقصيدة، يشدّان القارئ دون أن يكشفا كل شيء.</p>
-      <span class="meta">شعر حر</span>
-    </article>
-    <article class="card">
-      <span class="label">قصيدة</span>
-      <h3><a href="poems.html#poem-2">القصيدة الثانية</a></h3>
-      <p>بدّلي هذا الوصف بوصفك — قصير، دافئ، وصادق.</p>
-      <span class="meta">عمودي</span>
-    </article>
-    <article class="card">
-      <span class="label">قصيدة</span>
-      <h3><a href="poems.html#poem-3">القصيدة الثالثة</a></h3>
-      <p>بطاقة تجريبية أخرى. انسخيها أو احذفيها حسب عدد قصائدك.</p>
-      <span class="meta">قصيرة</span>
-    </article>
-  </div>
+  <section class="page plain center dedication" data-toc="الإهداء">
+    <p class="dedicate">إلى …<br>بدّلي هذا السطر بإهدائك،<br>لمن كتبتِ له أول قصيدة.</p>
+  </section>
 
-  <div class="section-head reveal">
-    <h2>أحدث الكتابات</h2>
-    <a href="writings.html">كل الكتابات ←</a>
-  </div>
-  <div class="card-grid reveal">
-    <article class="card">
-      <span class="label">خاطرة</span>
-      <h3><a href="writings.html#piece-1">عنوان الخاطرة</a></h3>
-      <p>نص نثري قصير — تأمل، أو رسالة، أو حكاية صغيرة. بدّلي هذا الوصف بوصفك.</p>
-      <span class="meta">٤ دقائق قراءة</span>
-    </article>
-    <article class="card">
-      <span class="label">رسالة</span>
-      <h3><a href="writings.html#piece-2">عنوان آخر</a></h3>
-      <p>تقدرين تخلطين الأنواع هنا: يوميات، رسائل، قصص قصيرة جداً.</p>
-      <span class="meta">دقيقتان قراءة</span>
-    </article>
-  </div>
+  <section class="page toc-page">
+    <h2 class="ruqaa">الفهرس</h2>
+    <ol class="toc" data-auto-toc></ol>
+  </section>
 
-</main>
+  <section class="page" data-toc="مقدّمة">
+    <h2 class="ruqaa">مقدّمة</h2>
+    <div class="prose">
+      <p>كلمة قصيرة قبل القصائد: كيف وُلد هذا الديوان، ولمن، ومتى. بدّلي هذه الفقرة بكلامك، أو احذفي الصفحة كلها لو ما تبينها.</p>
+    </div>
+  </section>
 
-<footer class="wrap">
-  <span>© ٢٠٢٦ ديوان دانة</span>
-  <a href="about.html">راسليني ←</a>
-</footer>
+  <!-- ===== الباب الأول ===== -->
+  <section class="page plain center part" data-part="القصائد" data-toc="الباب الأول: القصائد">
+    <svg class="orn-star"><use href="#star"/></svg>
+    <p class="small">الباب الأول</p>
+    <h2 class="ruqaa big">القصائد</h2>
+  </section>
 
-<script src="js/main.js"></script>
+  <!-- شعر حر: اكتبي القصيدة كما هي، كل سطر في سطر -->
+  <section class="page" data-toc="القصيدة الأولى">
+    <h2 class="ruqaa">القصيدة الأولى</h2>
+    <p class="verse">هنا مكانُ قصيدتكِ كاملة.
+احتفظي بفواصل الأسطر كما هي،
+وستظهر على الصفحة
+تماماً كما كتبتِها.
+
+اتركي سطراً فارغاً بين المقاطع،
+وانسخي هذه الصفحة كلها
+لكل قصيدة جديدة.</p>
+    <p class="footnote">كُتبت في ليلةٍ هادئة</p>
+  </section>
+
+  <!-- شعر عمودي: كل بيت = <p class="bayt"><span>الصدر</span><span>العجز</span></p> -->
+  <section class="page" data-toc="القصيدة الثانية">
+    <h2 class="ruqaa">القصيدة الثانية</h2>
+    <div class="abyat">
+      <p class="bayt"><span>هنا صدرُ البيتِ الأوّلِ يُكتبُ</span><span>وهنا عجزُهُ في الجهةِ الأخرى</span></p>
+      <p class="bayt"><span>وصدرُ البيتِ الثاني هنا</span><span>وعجزُهُ يأتي بعدَهُ مباشرةً</span></p>
+      <p class="bayt"><span>انسخي السطرَ لكلِّ بيتٍ</span><span>واحذفي ما لا تحتاجين</span></p>
+    </div>
+  </section>
+
+  <section class="page center" data-toc="القصيدة الثالثة">
+    <h2 class="ruqaa">القصيدة الثالثة</h2>
+    <p class="verse">القصائدُ القصيرة تليقُ بهذا الديوان أيضاً،
+أحياناً أصغرُها يقولُ أكثر.</p>
+  </section>
+
+  <!-- ===== الباب الثاني ===== -->
+  <section class="page plain center part" data-part="نصوص" data-toc="الباب الثاني: نصوص">
+    <svg class="orn-star"><use href="#star"/></svg>
+    <p class="small">الباب الثاني</p>
+    <h2 class="ruqaa big">نصوص</h2>
+  </section>
+
+  <!-- نثر: كل فقرة في <p> -->
+  <section class="page" data-toc="عنوان الخاطرة">
+    <h2 class="ruqaa">عنوان الخاطرة</h2>
+    <div class="prose">
+      <p>هذه الفقرة الأولى من نصّك النثري. اكتبي هنا كما تكتبين في دفترك، بلا قيود، وسيأخذ النص شكله على الصفحة تلقائياً.</p>
+      <p>وهذه فقرة ثانية. لو طال النص عن الصفحة، قسّميه على صفحتين: الثانية بدون data-toc حتى لا تتكرر في الفهرس.</p>
+    </div>
+  </section>
+
+  <section class="page" data-toc="رسالة لم تُرسل">
+    <h2 class="ruqaa">رسالة لم تُرسل</h2>
+    <div class="prose">
+      <p>نص تجريبي آخر. تقدرين تكتبين هنا رسالة، أو يومية، أو قصة قصيرة جداً. انسخي هذه الصفحة لكل نص جديد واحذفي ما لا تحتاجينه.</p>
+    </div>
+  </section>
+
+  <!-- ===== عن الكاتبة ===== -->
+  <section class="page center about" data-part="عن الكاتبة" data-toc="عن الكاتبة">
+    <figure class="portrait">
+      <img src="img/typewriter.jpeg" alt="يدان تكتبان على آلة كاتبة قديمة">
+    </figure>
+    <h2 class="ruqaa">عن الكاتبة</h2>
+    <p>أنا <strong>دانة</strong>. بدّلي هذه الفقرة بنبذتك: كيف بدأتِ الكتابة، وما الذي يشدّك للشعر والنثر.</p>
+    <p class="contact">
+      <a href="mailto:you@example.com">البريد</a> ·
+      <a href="https://instagram.com/yourhandle">إنستغرام</a> ·
+      <a href="https://x.com/yourhandle">إكس</a>
+    </p>
+  </section>
+
+  <section class="page plain center colophon">
+    <div class="divider"></div>
+    <p class="ruqaa big-ish">تمّ الديوان</p>
+    <p class="small muted">شكراً لأنك قرأت حتى هنا</p>
+    <svg class="orn-star"><use href="#star"/></svg>
+  </section>
+
+</div>
+
+<script src="js/book.js"></script>
 </body>
 </html>
